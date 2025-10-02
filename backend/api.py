@@ -15,7 +15,6 @@ try:
     from .csv_io import exportar_livros_para_csv, importar_livros_de_csv
     from .backup import criar_backup, limpar_backups_antigos
 except ImportError:
-    # Execução direta do arquivo dentro de backend/
     from config import inicializar_estrutura_diretorios, EXPORTS_DIR
     from banco import criar_tabelas
     from livros import (
@@ -33,8 +32,6 @@ app = Flask(__name__)
 app.config["JSON_AS_ASCII"] = False
 CORS(app)
 
-
-# Inicializa o backend (diretórios e tabelas)
 inicializar_estrutura_diretorios()
 criar_tabelas()
 
@@ -43,7 +40,6 @@ def resposta_erro(mensagem: str, status: int = 400):
     return jsonify({"sucesso": False, "mensagem": mensagem}), status
 
 
-# CRUD de livros
 @app.get("/livros")
 def rota_listar_livros():
     dados = listar_livros()
@@ -61,7 +57,7 @@ def rota_adicionar_livro():
             body.get("preco", ""),
         )
         return jsonify({"sucesso": True, "id": novo_id}), 201
-    except Exception as exc:  # simples para fins didáticos
+    except Exception as exc:
         return resposta_erro(str(exc), status=400)
 
 
@@ -102,7 +98,6 @@ def rota_buscar_por_autor():
         return resposta_erro(str(exc), status=400)
 
 
-# CSV
 @app.get("/exportar")
 def rota_exportar_csv():
     caminho = exportar_livros_para_csv()
@@ -111,7 +106,6 @@ def rota_exportar_csv():
 
 @app.post("/importar")
 def rota_importar_csv():
-    # aceita upload multipart/form-data com campo 'arquivo'
     if "arquivo" in request.files:
         arquivo = request.files["arquivo"]
         if arquivo.filename == "":
@@ -128,7 +122,6 @@ def rota_importar_csv():
                 pass
         return jsonify({"sucesso": True, "inseridos": inseridos})
 
-    # alternativa: json com caminho
     body = request.get_json(silent=True) or {}
     caminho_str = body.get("caminho")
     if not caminho_str:
@@ -141,7 +134,6 @@ def rota_importar_csv():
         return resposta_erro(str(exc), 400)
 
 
-# Backups
 @app.get("/backup")
 def rota_criar_backup():
     caminho = criar_backup()
@@ -162,7 +154,6 @@ def rota_limpar_backups():
 
 
 if __name__ == "__main__":
-    # Execucao direta para desenvolvimento local
     app.run(host="0.0.0.0", port=5000)
 
 

@@ -11,31 +11,30 @@ except ImportError:
     from livros import adicionar_livro, listar_livros
 
 
-def exportar_livros_para_csv(caminho: Path | None = None) -> Path:
-    if caminho is None:
-        caminho = EXPORTS_DIR / "livros_exportados.csv"
-    caminho.parent.mkdir(parents=True, exist_ok=True)
+def exportar_livros_para_csv(path: Path | None = None) -> Path:
+    if path is None:
+        path = EXPORTS_DIR / "livros_exportados.csv"
+    path.parent.mkdir(parents=True, exist_ok=True)
 
     campos = ["id", "titulo", "autor", "ano_publicacao", "preco"]
     linhas = listar_livros()
 
-    with caminho.open("w", newline="", encoding="utf-8") as f:
+    with path.open("w", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=campos)
         writer.writeheader()
         for linha in linhas:
             writer.writerow(linha)
 
-    return caminho
+    return path
 
 
-def importar_livros_de_csv(caminho: Path) -> int:
-    if not caminho.exists():
-        raise FileNotFoundError(str(caminho))
+def importar_livros_de_csv(path: Path) -> int:
+    if not path.exists():
+        raise FileNotFoundError(str(path))
 
     inseridos = 0
-    # Um unico backup antes da operacao em massa
     criar_backup()
-    with caminho.open("r", newline="", encoding="utf-8") as f:
+    with path.open("r", newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
             titulo = row.get("titulo", "")

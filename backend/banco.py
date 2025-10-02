@@ -7,16 +7,16 @@ except ImportError:
     from config import DB_PATH, inicializar_estrutura_diretorios
 
 
-def obter_conexao() -> Connection:
+def connectbd() -> Connection:
     inicializar_estrutura_diretorios()
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    return conn
+    bd = sqlite3.connect(DB_PATH)
+    bd.row_factory = sqlite3.Row
+    return bd
 
 
 def criar_tabelas() -> None:
-    with obter_conexao() as conn:
-        conn.execute(
+    with connectbd() as bd:
+        bd.execute(
             """
             CREATE TABLE IF NOT EXISTS livros (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -27,6 +27,6 @@ def criar_tabelas() -> None:
             )
             """
         )
-        conn.commit()
+        bd.commit()
 
 
