@@ -18,6 +18,7 @@ def criar_backup() -> Path | None:
 
     destino = BACKUPS_DIR / f"backup_livraria_{timestamp}.db"
     shutil.copy2(DB_PATH, destino)
+    limpar_backups_antigos(max_arquivos=5)
     return destino
 
 
