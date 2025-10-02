@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Livraria Tópicos - Frontend</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="./app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1> Livraria Tópicos</h1>
+      <div class="linha">
+        <label for="api-url">API URL</label>
+        <input id="api-url" value="http://localhost:5000" />
+        <button id="btn-salvar-api" class="secundario">Salvar</button>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="bloco bloco-form">
+        <h2>Adicionar livro</h2>
+        <form id="form-adicionar">
+          <div class="grid-form">
+            <div class="campo">
+              <label for="titulo">Título</label>
+              <input id="titulo" name="titulo" required>
+            </div>
+            <div class="campo">
+              <label for="autor">Autor</label>
+              <input id="autor" name="autor" required>
+            </div>
+            <div class="campo">
+              <label for="ano">Ano</label>
+              <input id="ano" name="ano" type="number" min="0" max="9999" required>
+            </div>
+            <div class="campo">
+              <label for="preco">Preço (R$)</label>
+              <input id="preco" name="preco" type="number" step="0.01" min="0" required>
+            </div>
+          </div>
+          <div class="alinhar-direita">
+            <span id="msg-adicionar" class="mensagens-inline" aria-live="polite"></span>
+            <button type="submit">Adicionar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="bloco bloco-busca">
+        <h2>Buscar por autor</h2>
+        <div class="linha">
+          <input id="busca-autor" placeholder="Nome do autor">
+          <span id="msg-buscar" class="mensagens-inline" aria-live="polite"></span>
+          <button id="btn-buscar">Buscar</button>
+          <button id="btn-carregar-todos" class="secundario">Carregar todos</button>
+        </div>
+      </section>
+
+      <section class="bloco bloco-tabela">
+        <h2>Livros</h2>
+        <div id="carregando" class="carregando" hidden>Carregando...</div>
+        <div class="tabela-wrapper ocupar">
+          <table id="tabela-livros">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Ano</th>
+                <th>Preço (R$)</th>
+                <th colspan="2">Alterar Preço</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+          <div id="estado-vazio" class="estado-vazio" hidden>Nenhum livro encontrado</div>
+        </div>
+      </section>
+
+      <section class="bloco bloco-csv">
+        <h2>CSV</h2>
+        <div class="linha">
+          <span id="msg-exportar" class="mensagens-inline" aria-live="polite"></span>
+          <button id="btn-exportar">Exportar CSV</button>
+        </div>
+        <div class="linha">
+          <input id="arquivo-csv" type="file" accept=".csv">
+          <span id="msg-importar" class="mensagens-inline" aria-live="polite"></span>
+          <button id="btn-importar">Importar CSV</button>
+        </div>
+      </section>
+
+      <section class="bloco bloco-backup">
+        <h2>Backups</h2>
+        <div class="linha">
+          <span id="msg-backup" class="mensagens-inline" aria-live="polite"></span>
+          <button id="btn-backup">Criar backup agora</button>
+        </div>
+        <div class="linha">
+          <label for="max-backups">Manter últimos</label>
+          <input id="max-backups" type="number" min="1" value="5">
+          <span id="msg-limpar" class="mensagens-inline" aria-live="polite"></span>
+          <button id="btn-limpar-backups" class="perigo">Limpar backups antigos</button>
+        </div>
+      </section>
+
+      
+    </main>
+  </body>
+  </html>
+
+

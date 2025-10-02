@@ -1,0 +1,66 @@
+* { box-sizing: border-box; }
+body { font-family: system-ui, Arial, sans-serif; margin: 0; background: #f6f7f9; color: #1f2937; }
+
+header, footer { background: #111827; color: #fff; padding: 12px 16px; }
+
+main.layout { padding: 16px; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto 1fr auto auto; gap: 12px; min-height: calc(100vh - 100px); }
+
+.bloco { background: #fff; padding: 16px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #e5e7eb; }
+
+.bloco-form { grid-column: 1; grid-row: 1; }
+
+.bloco-busca { grid-column: 1 / -1; grid-row: 2; }
+
+.bloco-tabela { grid-column: 1 / -1; grid-row: 3; display: flex; flex-direction: column; }
+.bloco-csv { grid-column: 1; grid-row: 4; }
+
+.bloco-backup { grid-column: 2; grid-row: 4; }
+
+.bloco-status { grid-column: 1 / -1; grid-row: 5; }
+
+.linha { display: flex; gap: 8px; align-items: center; margin: 8px 0; flex-wrap: wrap; }
+
+.grid-form { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; align-items: end; }
+
+.campo { display: flex; flex-direction: column; gap: 6px; }
+
+label { font-size: 12px; color: #374151; min-width: auto; }
+
+input { padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px; width: 100%; }
+
+button { padding: 8px 12px; background: #2563eb; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+
+button:hover { background: #1d4ed8; }
+
+button.secundario { background: #6b7280; }
+
+button.secundario:hover { background: #4b5563; }
+
+button.perigo { background: #dc2626; }
+
+button.perigo:hover { background: #b91c1c; }
+
+.tabela-wrapper { overflow-x: auto; }
+
+.tabela-wrapper.ocupar { flex: 1; display: flex; flex-direction: column; }
+
+table { width: 100%; border-collapse: collapse; }
+
+th, td { border-bottom: 1px solid #e5e7eb; padding: 8px; text-align: left; }
+
+.alinhar-direita { display: flex; justify-content: flex-end; margin-top: 8px; }
+
+.mensagens { min-height: 24px; padding: 8px; background: #f1f5f9; border: 1px dashed #94a3b8; border-radius: 6px; }
+
+.mensagens-inline { font-size: 12px; color: #374151; margin-right: auto; }
+
+.tag { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+
+.tag.ok { background: #dcfce7; color: #166534; }
+
+.tag.erro { background: #fee2e2; color: #991b1b; }
+
+.carregando { font-size: 14px; color: #6b7280; margin: 8px 0; }
+
+.estado-vazio { color: #6b7280; font-size: 14px; margin: 8px 0; }
+
