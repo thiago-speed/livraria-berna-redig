@@ -50,7 +50,7 @@ def executar_menu() -> None:
     criar_tabelas()
 
     while True:
-        print("\n===== LIVRARIA BERNA - MENU =====")
+        print("\n --- menu ---")
         exibir_menu()
         opcao = input("Escolha uma opção: ").strip()
 
@@ -61,7 +61,7 @@ def executar_menu() -> None:
                 ano = input("Ano de publicação: ").strip()
                 preco = input("Preço: ").strip()
                 novo_id = adicionar_livro(titulo, autor, ano, preco)
-                print(f"Livro inserido com id {novo_id}.")
+                print(f"Livro inserido id {novo_id}.")
             except Exception as exc:
                 print(f"Erro: {exc}")
             pausar()
@@ -78,32 +78,32 @@ def executar_menu() -> None:
 
         elif opcao == "3":
             try:
-                id_livro = input("ID do livro: ").strip()
-                novo_preco = input("Novo preço: ").strip()
+                id_livro = input("id do livro: ").strip()
+                novo_preco = input("novo preco: ").strip()
                 ok = atualizar_preco(id_livro, novo_preco)
                 if ok:
-                    print("Preço atualizado com sucesso.")
+                    print("preco atualizado")
                 else:
-                    print("Livro não encontrado.")
+                    print("livro nao foi encontrado.")
             except Exception as exc:
                 print(f"Erro: {exc}")
             pausar()
 
         elif opcao == "4":
             try:
-                id_livro = input("ID do livro: ").strip()
+                id_livro = input("id do livro: ").strip()
                 ok = remover_livro(id_livro)
                 if ok:
-                    print("Livro removido com sucesso.")
+                    print("livro removido.")
                 else:
-                    print("Livro não encontrado.")
+                    print("livro nao foi encontrado.")
             except Exception as exc:
                 print(f"Erro: {exc}")
             pausar()
 
         elif opcao == "5":
             try:
-                autor = input("Autor (termo de busca): ").strip()
+                autor = input("Autor busca: ").strip()
                 achados = buscar_por_autor(autor)
                 if not achados:
                     print("Nenhum livro encontrado para este autor.")
@@ -118,16 +118,16 @@ def executar_menu() -> None:
         elif opcao == "6":
             try:
                 caminho = exportar_livros_para_csv()
-                print(f"Exportado para: {caminho}")
+                print(f"Exportpara: {caminho}")
             except Exception as exc:
                 print(f"Erro ao exportar: {exc}")
             pausar()
 
         elif opcao == "7":
             try:
-                caminho_str = input("Caminho do CSV para importar: ").strip()
+                caminho_str = input("path do csv: ").strip()
                 inseridos = importar_livros_de_csv(Path(caminho_str))
-                print(f"Registros inseridos: {inseridos}")
+                print(f"inseridos: {inseridos}")
             except Exception as exc:
                 print(f"Erro ao importar: {exc}")
             pausar()
@@ -136,19 +136,19 @@ def executar_menu() -> None:
             try:
                 arquivo = criar_backup()
                 if arquivo:
-                    print(f"Backup criado em: {arquivo}")
+                    print(f"backup criado em: {arquivo}")
                 else:
-                    print("Nenhum banco para copiar.")
+                    print("nenhum banco para copiar.")
             except Exception as exc:
-                print(f"Erro ao criar backup: {exc}")
+                print(f"Erro backup: {exc}")
             pausar()
 
         elif opcao == "9":
-            print("Saindo...")
+            print("Saindo.")
             break
 
         else:
-            print("Opção inválida. Tente novamente.")
+            print("Opção inválida.")
 
 
 def main() -> None:
